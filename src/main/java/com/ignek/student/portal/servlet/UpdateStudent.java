@@ -17,24 +17,14 @@ public class UpdateStudent extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 	
-//		String stringId=httpServletRequest.getParameter("id");
 		int id = Integer.parseInt(httpServletRequest.getParameter("id"));
-//		int id;
-//		if(stringId=="")
-//		{
-//			id=0;
-//		}
-//		else
-//		{
-//			id=Integer.parseInt(httpServletRequest.getParameter("id"));
-//		}
-		String name=httpServletRequest.getParameter("name");
-		String email=httpServletRequest.getParameter("email");
-		String phoneNumber=httpServletRequest.getParameter("phoneNumber");
-		String birthDateString=httpServletRequest.getParameter("birthDate");
-		String education=httpServletRequest.getParameter("education");
+		String name = httpServletRequest.getParameter("name");
+		String email = httpServletRequest.getParameter("email");
+		String phoneNumber = httpServletRequest.getParameter("phoneNumber");
+		String birthDateString = httpServletRequest.getParameter("birthDate");
+		String education = httpServletRequest.getParameter("education");
 
-		Student student=new Student();
+		Student student = new Student();
 		student.setId(id);
 		student.setName(name);
 		student.setEmail(email);
@@ -42,17 +32,17 @@ public class UpdateStudent extends HttpServlet{
 		student.setBirthDate(birthDateString);
 		student.setEducation(education);
 			
-		int status=StudentDao.insert(student);
+		int status = StudentDao.insert(student);
 		
-		if(status==1){
-			List<Student> students=StudentDao.viewStudents();
+		if(status == 1){
+			List<Student> students = StudentDao.viewStudents();
 			System.out.println(students);
 			httpServletRequest.setAttribute("studentList", students);
 			httpServletRequest.getRequestDispatcher("index.jsp").forward(httpServletRequest, httpServletResponse);
 		}
 		else{
-			String msg="Something went wrong";
-			httpServletRequest.setAttribute("msg",msg);
+			String msg = "Something went wrong";
+			httpServletRequest.setAttribute("msg", msg);
 			httpServletRequest.getRequestDispatcher("error.jsp").forward(httpServletRequest, httpServletResponse);
 		}
 	}
