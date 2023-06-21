@@ -18,7 +18,7 @@ public class DeleteStudent extends HttpServlet{
 	protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
 
 		int id=Integer.parseInt(httpServletRequest.getParameter("id"));
-		int status=StudentDao.delete(id);
+		int status = StudentDao.delete(id);
 		if(status==1){
 			List<Student> students=StudentDao.viewStudents();
 			System.out.println(students);
