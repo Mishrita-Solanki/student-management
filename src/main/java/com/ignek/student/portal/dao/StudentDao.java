@@ -22,31 +22,31 @@ public class StudentDao {
 	public static int insert(Student student)
 	{
 		
-		int status=0;
+		int status = 0;
 		try
 		{
-			Connection connection=getConnection();
-			int id=student.getId();
+			Connection connection = getConnection();
+			int id = student.getId();
 			PreparedStatement preparedStatement;
-			if(id==0)
+			if(id == 0)
 			{
-				preparedStatement=connection.prepareStatement("insert into student(name,email,phone_number,birth_date,education) values(?,?,?,?,?)");		
+				preparedStatement = connection.prepareStatement("insert into student(name,email,phone_number,birth_date,education) values(?,?,?,?,?)");		
 			}
 			else
 			{
-				preparedStatement=connection.prepareStatement("update student set name=?,email=?,phone_number=?,birth_date=?,education=? where id=?");
+				preparedStatement = connection.prepareStatement("update student set name=?,email=?,phone_number=?,birth_date=?,education=? where id=?");
 				preparedStatement.setInt(6, student.getId());
 			}
 			preparedStatement.setString(1, student.getName());
 			preparedStatement.setString(2, student.getEmail());
 			preparedStatement.setString(3, student.getPhoneNumber());
-			String dobString=student.getBirthDate();
+			String dobString = student.getBirthDate();
 			//date
 			java.sql.Date birthDate = java.sql.Date.valueOf(dobString);
 			preparedStatement.setDate(4, birthDate);
 			preparedStatement.setString(5, student.getEducation());
 			
-			status=preparedStatement.executeUpdate();
+			status = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
 			return status;
@@ -63,7 +63,7 @@ public class StudentDao {
 		try
 		{
 			Connection connection = getConnection();
-			PreparedStatement preparedStatement=connection.prepareStatement("delete from student where id=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from student where id=?");
 			preparedStatement.setInt(1,id);
 			
 			status=preparedStatement.executeUpdate();
@@ -79,13 +79,13 @@ public class StudentDao {
 		 List<Student> students = new ArrayList<>();
 		 try
 		 {
-			 Connection connection=getConnection();
-			 PreparedStatement preparedStatement=connection.prepareStatement("select*from student");
-			 ResultSet resultSet=preparedStatement.executeQuery();
+			 Connection connection = getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement("select*from student");
+			 ResultSet resultSet = preparedStatement.executeQuery();
 			 
 			 while(resultSet.next())
 			 {
-				 Student student=new Student();
+				 Student student = new Student();
 				 student.setId(resultSet.getInt("id"));
 				 student.setEmail(resultSet.getString("email"));
 				 student.setName(resultSet.getString("name"));
@@ -110,13 +110,13 @@ public class StudentDao {
 	//get student
 	public static Student getStudent(int id)
 	{
-		Student student=new Student();
+		Student student = new Student();
 		try {
-			Connection connection=getConnection();
-			PreparedStatement preparedStatement=connection.prepareStatement("select*from student where id=?");
+			Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("select*from student where id=?");
 			
 			preparedStatement.setInt(1,id);
-			ResultSet resultSet=preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())
 			{
 				student.setId(resultSet.getInt("id"));
