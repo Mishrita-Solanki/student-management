@@ -17,7 +17,7 @@ public class ViewStudents extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException,IOException {
 		
-		List<Student> students=StudentDao.viewStudents();
+		List<Student> students = StudentDao.viewStudents();
 		System.out.println(students);
 		httpServletRequest.setAttribute("studentList", students);
 		httpServletRequest.getRequestDispatcher("index.jsp").forward(httpServletRequest, httpServletResponse); 

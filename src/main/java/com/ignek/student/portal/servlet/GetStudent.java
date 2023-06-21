@@ -20,13 +20,12 @@ public class GetStudent extends HttpServlet{
 		{
 			Student student = new Student();
 			student.setId(id);
-			httpServletRequest.setAttribute("student",student);
+			httpServletRequest.setAttribute("student", student);
 			httpServletRequest.getRequestDispatcher("edit.jsp").forward(httpServletRequest, httpServletResponse);
-			System.out.println("reached..");
 		}
 		else
 		{
-			Student student=StudentDao.getStudent(id);
+			Student student = StudentDao.getStudent(id);
 			httpServletRequest.setAttribute("student", student);
 			httpServletRequest.getRequestDispatcher("edit.jsp").forward(httpServletRequest, httpServletResponse);
 		}

@@ -62,8 +62,8 @@ public class StudentDao {
 		int status=0;
 		try
 		{
-			Connection connection=getConnection();
-			PreparedStatement preparedStatement=connection.prepareStatement("delete from student where id=?");
+			Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from student where id=?");
 			preparedStatement.setInt(1,id);
 			
 			status=preparedStatement.executeUpdate();
@@ -79,13 +79,13 @@ public class StudentDao {
 		 List<Student> students = new ArrayList<>();
 		 try
 		 {
-			 Connection connection=getConnection();
-			 PreparedStatement preparedStatement=connection.prepareStatement("select*from student");
-			 ResultSet resultSet=preparedStatement.executeQuery();
+			 Connection connection = getConnection();
+			 PreparedStatement preparedStatement = connection.prepareStatement("select*from student");
+			 ResultSet resultSet = preparedStatement.executeQuery();
 			 
 			 while(resultSet.next())
 			 {
-				 Student student=new Student();
+				 Student student = new Student();
 				 student.setId(resultSet.getInt("id"));
 				 student.setEmail(resultSet.getString("email"));
 				 student.setName(resultSet.getString("name"));
@@ -110,13 +110,13 @@ public class StudentDao {
 	//get student
 	public static Student getStudent(int id)
 	{
-		Student student=new Student();
+		Student student = new Student();
 		try {
-			Connection connection=getConnection();
-			PreparedStatement preparedStatement=connection.prepareStatement("select*from student where id=?");
+			Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("select*from student where id=?");
 			
 			preparedStatement.setInt(1,id);
-			ResultSet resultSet=preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())
 			{
 				student.setId(resultSet.getInt("id"));
