@@ -22,31 +22,31 @@ public class StudentDao {
 	public static int insert(Student student)
 	{
 		
-		int status=0;
+		int status = 0;
 		try
 		{
-			Connection connection=getConnection();
-			int id=student.getId();
+			Connection connection = getConnection();
+			int id = student.getId();
 			PreparedStatement preparedStatement;
-			if(id==0)
+			if(id == 0)
 			{
-				preparedStatement=connection.prepareStatement("insert into student(name,email,phone_number,birth_date,education) values(?,?,?,?,?)");		
+				preparedStatement = connection.prepareStatement("insert into student(name,email,phone_number,birth_date,education) values(?,?,?,?,?)");		
 			}
 			else
 			{
-				preparedStatement=connection.prepareStatement("update student set name=?,email=?,phone_number=?,birth_date=?,education=? where id=?");
+				preparedStatement = connection.prepareStatement("update student set name=?,email=?,phone_number=?,birth_date=?,education=? where id=?");
 				preparedStatement.setInt(6, student.getId());
 			}
 			preparedStatement.setString(1, student.getName());
 			preparedStatement.setString(2, student.getEmail());
 			preparedStatement.setString(3, student.getPhoneNumber());
-			String dobString=student.getBirthDate();
+			String dobString = student.getBirthDate();
 			//date
 			java.sql.Date birthDate = java.sql.Date.valueOf(dobString);
 			preparedStatement.setDate(4, birthDate);
 			preparedStatement.setString(5, student.getEducation());
 			
-			status=preparedStatement.executeUpdate();
+			status = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
 			return status;
