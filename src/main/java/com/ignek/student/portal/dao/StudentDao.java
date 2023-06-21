@@ -62,7 +62,7 @@ public class StudentDao {
 		int status=0;
 		try
 		{
-			Connection connection=getConnection();
+			Connection connection = getConnection();
 			PreparedStatement preparedStatement=connection.prepareStatement("delete from student where id=?");
 			preparedStatement.setInt(1,id);
 			
